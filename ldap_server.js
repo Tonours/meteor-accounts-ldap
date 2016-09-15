@@ -70,7 +70,8 @@ LDAP.create.prototype.ldapCheck = function (options, bindAfterFind) {
         var fullUrl = self.options.url + ':' + self.options.port;
         var client = null;
 
-        if (self.options.url.indexOf('ldaps://') === 0) {
+        // Ensure ldapsCertificate is set to true
+        if (self.options.url.indexOf('ldaps://') === 0 && self.options.ldapsCertificate) {
             client = self.ldapjs.createClient({
                 url: fullUrl,
                 tlsOptions: {
